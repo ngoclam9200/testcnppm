@@ -1,0 +1,32 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Contact Form</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+</head>
+<app-layout></app-layout>
+
+<body>
+
+
+  <div class="contact-section">
+    <div class="contact-info">
+      <div><i class="fas fa-map-marker-alt"></i>{{address}}</div>
+      <div><i class="fas fa-envelope"></i>{{email}}</div>
+      <div><i class="fas fa-phone"></i>{{phoneNumber}}</div>
+      <div><i class="fas fa-clock"></i>{{myDate | date:'long'}} </div>
+    </div>
+    <div class="contact-form">
+      <h2>Contact Us</h2>
+      <form [formGroup]="formGroup" (ngSubmit)="postcontact()" class="contact" action="" method="post">
+        <input formControlName="name" type="text" name="name" class="text-box" placeholder="Your Name" required>
+        <input formControlName="email" type="email" name="email" class="text-box" placeholder="Your Email" required>
+        <textarea formControlName="body" ng-model="myTextarea"></textarea>
+        <input type="submit" name="submit" class="send-btn" value="Send">
+      </form>
+    </div>
+  </div>
+
+
+</body>
