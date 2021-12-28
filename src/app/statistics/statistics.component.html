@@ -1,7 +1,15 @@
 <app-layoutadmin></app-layoutadmin>
+<form [formGroup]="formGroup" style="margin-left: 624px;">
+    <select style="width:100px;text-align:center;" formControlName="year"  id="ddlViewBy">
+        <option *ngFor="let data of year" value="{{data}}">{{data}}</option>
+       
+    </select>
+      <button (click)="changeyearstatictis()" style="margin-left: 30px;width: 100px;">Change year</button>
+</form>
 <div style="margin-left: 300px;font-size: 18px;" id="divChart">
     <canvas id="myChart"></canvas>
 </div>
+
 <div style="margin-left: 300px;font-size: 18px;margin-top: 0px;" id="divChartCompany">
     <canvas width="200px" height="200px" id="myChartcompany"></canvas>
 </div>

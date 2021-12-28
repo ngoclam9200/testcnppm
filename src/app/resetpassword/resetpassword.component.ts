@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import {  Router } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
+
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',
-  styleUrls: ['./resetpassword.component.css']
+  styleUrls: ['./assets/style.css']
 })
 export class ResetpasswordComponent implements OnInit {
   formGroupresetpass : FormGroup;
-  constructor(private http: HttpClient, private router: Router, private api:ApiService) { }
+  data:any
+  token:any
+  constructor(private http: HttpClient, private router: Router, private api:ApiService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -21,30 +24,50 @@ export class ResetpasswordComponent implements OnInit {
     this.formGroupresetpass= new FormGroup({
      
       
-      email: new FormControl("", [Validators.required]),
+      matKhauMoi: new FormControl("", [Validators.required]),
+      xacNhanMatKhauMoi:new FormControl("", [Validators.required]),
      
     }); 
+    
     
 
   }
   Resetpassword(){
+
+    
     if (this.formGroupresetpass.valid) {
+
+
        this.reset(this.formGroupresetpass.value).subscribe((result) => {
+       
+        this.data=result
+         if(result)
+         {
+           alert(this.data.message)
+
+           this.router.navigate(['/']);
+
+         }
+     
  
 
-        if (result)
+       
          
 
        
        
-        alert("Checkmail to recive password");
-        this.router.navigate(['/signin']);
+      
+       
 
+      },error=>{
+        alert(error.error.message)
       });
+     
 
     }
+    else alert("Bạn chưa nhập đầy đủ thông tin")
 
-    else alert("Bạn chưa nhập đầy đủ thông tin");
+   
 
   
 
@@ -52,11 +75,22 @@ export class ResetpasswordComponent implements OnInit {
   }
   reset(data){
     let headers = new HttpHeaders();
+
   
-    // headers = headers.set('Access-Control-Allow-Origin', '*').set('Authorization', `Bearer ${token}`);
+    this.route.queryParams
+    .subscribe(params => {
+    
+      this.token = params.token;
+      
+    }
+  );
+    var token = this.token
+    
+     headers = headers.set('Access-Control-Allow-Origin', '*').set('Authorization', `Bearer ${token}`);
 
 
-    return this.http.post(this.api.apiuser+`reset_password`, data);
+    return this.http.post(this.api.apiuser+`ResetPassword`, data, {headers:headers});
   }
+
 
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+	
+<head>
+
+	<title>Shopping Cart</title>
+	
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+	<div style="margin-top: 50px;"></div>
+
+	
+
+
+	<div   class="cart">
+
+		<div   class="products">
+
+			<div *ngFor="let data of data | paginate: { itemsPerPage: 1, currentPage: p }" class="product">
+
+				<img   src="{{data.hinhAnh}}">
+
+				<div class="product-info">
+
+					<h3 class="product-name"> {{data.tenSP}} </h3>
+
+					<h4  class="product-price">Quantity:{{data.soLuongDat}}    </h4>
+
+					<h4 class="product-offer">Price:{{data.tongTien.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}}</h4>
+                   
+
+					
+
+					
+				</div>
+
+			</div>
+
+			
+
+		</div> <br>
+  
+        
+
+		
+	</div>
+
+
+</div>
+<div style="margin-left: 120px;" >
+	<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+     
+
+</body>
+
+
+
+
+</html>
+
+<p>Address  {{diaChiGiaoHang}}</p>
+<p>Phone number receiver: {{sdtNguoiNhan}}</p>
+<p>Paid: {{daThanhToan}}</p>
+<p>Status:  {{trangThaiGiaoHang}}</p>
+<p>Date order:  {{ngayXuatDon.slice(11,20)}} ---- {{ngayXuatDon.slice(0,10)}}</p>
+<p style="color: red;">Total: {{tongHoaDon.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}}</p>
+
+
+<button style="margin-left: 200px;" (click)="close()">Close</button>

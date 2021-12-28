@@ -25,30 +25,31 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<div class="main">
 		<div class="main-w3l">
 
-			<h1 class="logo-w3">LTSHOWROOM </h1>
+			
 			<div class="w3layouts-main">
 				<h2><span>Sign up now</span></h2>
 
 
-				<form [formGroup]="formGroup" (ngSubmit)="registerProces()">
+				<form [formGroup]="formGroup" >
 					<input placeholder=" Email" formControlName="email" type="email" required="">
-					<input placeholder=" Username" value="" formControlName="userName" type="text">
-					<input placeholder="Full name" value="" formControlName="fullName" name="Password" type="text"
+					<input placeholder=" Username" value="" formControlName="tenDangNhap" type="text">
+					<input placeholder="Full name" value="" formControlName="tenNguoiDung" name="Password" type="text"
 						required="">
-					<input placeholder="Address" value="" formControlName="address" name="address" type="text"
+					<input placeholder="Address" value="" formControlName="diaChi" name="address" type="text"
 						required="">
-					<input placeholder="Phone number" value="" formControlName="phoneNumber" name="phoneNumber"
+					<input placeholder="Phone number" value="" formControlName="sDT" name="phoneNumber"
 						type="text" required="ádsdas">
 
-					<input placeholder="Password" formControlName="password" name="Password" type="password"
+					<input placeholder="Password" formControlName="matKhau" name="Password" type="password"
 						required="">
-					<input placeholder="Confirm Password" formControlName="confirmpassword" name="Password"
+					<input placeholder="Confirm Password" formControlName="xacNhanMatKhau" name="Password"
 						type="password" required="">
-					<input type="submit" value="Sign up" name="login">
+					<input (click)="registerProces()" type="submit" value="Sign up" name="login">
+					 <input [routerLink]='["/"]' type="submit" value="Sign in" name="login">
 
 				</form>
 
-				<h6><a [routerLink]='["/signin"]'>Sign in</a></h6>
+				
 			</div>
 
 		</div>

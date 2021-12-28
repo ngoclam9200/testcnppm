@@ -19,10 +19,10 @@
 					<section id="banner" class="major">
 						<div class="inner">
 							<header class="major">
-								<h1>Find Car Today</h1>
+								<h1>Find the product you want to buy </h1>
 							</header>
 							<div class="content">
-								<p>Liên hệ chúng tôi để tìm được xe mà bạn thích</p>
+								<p>Contact us to find the product you like</p>
 								<ul class="actions">
 									<li><a [routerLink]='["/contactus"]' class="button next scrolly">Contact us</a></li>
 								</ul>
@@ -38,9 +38,9 @@
 								<article style="border:2px solid black" *ngFor="let data of array">
 									<span  class="image">
 
-										<a  style="cursor: pointer;"><img   src="{{data.Image}}" width="340px" height="200px" alt="kjkkkkkk" /></a>
-										{{data.carName}}
-										<p> <strong> ${{data.price}}</strong></p>
+										<a  style="cursor: pointer;"><img   src="{{data.hinhAnh}}" width="340px" height="200px" alt="kjkkkkkk" /></a>
+										{{data.tenSP}}
+										<p> <strong> ${{data.giaTien}}</strong></p>
 									</span>
 
 								</article>
@@ -56,15 +56,15 @@
 										<h2>About us</h2>
 									</header>
 										<p style="text-align: left;">
-									   Công Ty Cổ Phần Xuất Nhập Khẩu Xe LT được thành lập tháng 12 năm 2020 bởi một số cổ đông chủ chốt của các công ty lớn giàu kinh nghiệm trong lĩnh vực ô tô như: Công ty LD SX ô tô Ngôi sao, Công ty LD Ôtô Deawoo (Vidamco), hệ thống showroom ô tô nhập khẩu - LT, hệ thống cơ sở hạ tầng được đầu tư xây dựng đồng bộ và hiện đại trên diện tích gần 4000 m2. Lĩnh vực hoạt động chủ yếu của công ty:
+											LT Shop là một sàn giao dịch thương mại điện tử, cung cấp sản phẩm đồ gia dụng khác nhau khác nhau như quạt , tủ lạnh, tivi , đồ dùng nhà bếp,..
 											<br>
 										</p>
 										<p style="text-align: left;"> 
-										✪ Đại lý ủy quyền phối xe BMW chính hãng tại Việt Nam.<br>
-										✪ Đại lý xe Porche<br>
-										✪ Kinh doanh, nhập khẩu xe ô tô, xe chuyên dùng và máy móc thiết bị của các hãng Toyota, Lexus, Audi, Land Rover, Mitsubishi… <br>
-										✪ Sửa chữa, bảo dưỡng các loại xe ô tô. <br>
-										✪ Đại lý ủy quyền phối xe BMW chính hãng tại Việt Nam.
+										✪ Là mô hình market place – là trung gian trong quy trình mua bán online<br>
+										✪ Đại lý các sản phẩm của Sunhouse<br>
+										✪ Chăm sóc khách hàng từ đội ngũ chuyên nghiệp 24/7 <br>
+										✪ Tận dụng các công cụ đắc lực hỗ trợ cho việc bán hàng. <br>
+										✪ Quy trình bán hàng trên LT Shop đơn giản, thuận tiện
 										</p>									<ul class="actions">
 										<li><a [routerLink]='["/aboutus"]' class="button next">Read more</a></li>
 									</ul>

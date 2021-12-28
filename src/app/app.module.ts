@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {MatDialog, MatDialogModule,} from '@angular/material/dialog'
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,22 +19,33 @@ import { HomeComponent } from './home/home.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { ProfileuserComponent } from './profileuser/profileuser.component';
-import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import {SendemailresetpasswordComponent } from './sendemailresetpassword/sendemailresetpassword.component';
 import { LayoutadminComponent } from './layoutadmin/layoutadmin.component';
-import { AlluserComponent } from './alluser/alluser.component';
-import { EditaboutComponent } from './editabout/editabout.component';
-import { ListcarComponent } from './listcar/listcar.component';
-import { CardetailComponent } from './cardetail/cardetail.component';
+import { AllstaffComponent } from './allstaff/allstaff.component';
+
+import { ListproductComponent } from './listproduct/listproduct.component';
+import { ProductdetailComponent } from './productdetail/productdetail.component';
 import { ProductadminComponent } from './productadmin/productadmin.component';
-import { CompanycarComponent } from './companycar/companycar.component';
-import { ListcompanycarComponent } from './listcompanycar/listcompanycar.component';
-import { SearchcarComponent } from './searchcar/searchcar.component';
-import { CarcomparisonComponent } from './carcomparison/carcomparison.component';
-import { ScheduleadminComponent } from './scheduleadmin/scheduleadmin.component';
-import { ScheduleuserComponent } from './scheduleuser/scheduleuser.component';
+import { ProducttypeadminComponent } from './producttypeadmin/producttypeadmin.component';
+import { ListproducttypeComponent } from './listproducttype/listproducttype.component';
+import { SearchproductComponent } from './searchproduct/searchproduct.component';
+
+import { OrderadminComponent } from './orderadmin/orderadmin.component';
+
 import { StatisticsComponent } from './statistics/statistics.component';
-import { ListbookinguserComponent } from './listbookinguser/listbookinguser.component';
+import {CartuserComponent } from './cartuser/cartuser.component';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
+import { AllcustommerComponent } from './allcustommer/allcustommer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreatebillComponent } from './createbill/createbill.component';
+import { BillComponent } from './bill/bill.component';
+import { BilldetailComponent } from './billdetail/billdetail.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TurnoverComponent } from './turnover/turnover.component';
+import { ImagecomponentComponent } from './imagecomponent/imagecomponent.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+
+
 
 
 @NgModule({
@@ -46,59 +58,80 @@ import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
     AboutusComponent,
     ContactusComponent,
     ProfileuserComponent,
-    ResetpasswordComponent,
+    SendemailresetpasswordComponent,
     LayoutadminComponent,
-    AlluserComponent,
-    EditaboutComponent,
-    ListcarComponent,
-    CardetailComponent,
+    AllstaffComponent,
+    CreatebillComponent,
+
+    ListproductComponent,
+    ProductdetailComponent,
     ProductadminComponent,
-    CompanycarComponent,
-    ListcompanycarComponent,
-    SearchcarComponent,
-    CarcomparisonComponent,
-    ScheduleadminComponent,
-    ScheduleuserComponent,
+    ProducttypeadminComponent,
+    ListproducttypeComponent,
+    SearchproductComponent,
+   
+    OrderadminComponent,
+   
     StatisticsComponent,
-    ListbookinguserComponent,
+    CartuserComponent,
     NotfoundpageComponent,
+    AllcustommerComponent,
+    BillComponent,
+    BilldetailComponent,
+    TurnoverComponent,
+    ImagecomponentComponent,
+    ResetpasswordComponent,
+   
+
 
 
   ],
   imports: [
     BrowserModule,
+    
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    MatDialogModule,
+    NgxPaginationModule,
+    
+    
     ReactiveFormsModule,
+    
     RouterModule.forRoot([
-      { path: 'signin', component: SigninComponent },
+      { path: '', component: SigninComponent },
 
       { path: 'signup', component: SignupComponent },
-      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'home', component: HomeComponent },
       { path: 'aboutus', component: AboutusComponent },
-      { path: 'editabout', component: EditaboutComponent },
-      { path: 'alluser', component: AlluserComponent },
+     
+      { path: 'allstaff', component: AllstaffComponent },
+      { path: 'allcustommer', component: AllcustommerComponent },
       { path: 'productadmin', component: ProductadminComponent },
-      { path: 'companycar', component: CompanycarComponent },
-      { path: 'listcompanycar', component: ListcompanycarComponent },
+      { path: 'producttypeadmin', component: ProducttypeadminComponent },
+      { path: 'listproducttype', component: ListproducttypeComponent },
       { path: 'contactus', component: ContactusComponent },
       { path: 'profileuser', component: ProfileuserComponent },
       { path: 'layoutadmin', component: LayoutadminComponent },
-      { path: 'resetpassword', component: ResetpasswordComponent },
-      { path: 'searchcar', component: SearchcarComponent },
-      { path: 'listbookinguser', component: ListbookinguserComponent },
-      { path: 'listcar', component: ListcarComponent },
-      { path: 'cardetail', component: CardetailComponent },
-      { path: 'carcomparison', component: CarcomparisonComponent },
-      { path: 'scheduleadmin', component: ScheduleadminComponent },
-      { path: 'scheduleuser', component: ScheduleuserComponent },
+      { path: 'sendemailresetpassword', component:SendemailresetpasswordComponent },
+      { path: 'searchproduct', component: SearchproductComponent },
+      { path: 'cartuser', component: CartuserComponent },
+      { path: 'listproduct', component: ListproductComponent },
+      { path: 'productdetail', component: ProductdetailComponent },
+      
+      { path: 'orderadmin', component: OrderadminComponent },
       { path: 'statistics', component: StatisticsComponent },
       { path: 'layout', component: LayoutComponent },
-      {path:'notfoundpage', component:NotfoundpageComponent}
-    ])
+      {path:'notfoundpage', component:NotfoundpageComponent},
+      {path:'bill', component:BillComponent},
+      {path:'turnover', component:TurnoverComponent},
+      {path:'resetpassword', component:ResetpasswordComponent},
+
+    ]),
+    
+    BrowserAnimationsModule
 
 
   ],

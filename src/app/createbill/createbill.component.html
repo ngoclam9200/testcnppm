@@ -1,0 +1,9 @@
+<form [formGroup]="formGroup" class="login">
+  <label style="margin:10px 30px; height:30px" >Phone number receiver </label>
+    <input formControlName="sdtNguoiNhan" style="margin:10px 30px; width:500px; height:30px" type="text" placeholder=" Enter Phone number receiver"> <br>
+    <label style="margin:10px 30px; height:30px">Address </label>
+    <input formControlName="diaChiGiaoHang" style="margin:10px 30px; width:500px; height:30px" type="text" placeholder=" Enter Addresss"> <br>
+    <button  (click)="createbill()" style="margin-left:200px;background-color: tomato;width: 70px;height: 30px;border-radius: 10px;">Order</button>
+    <button  (click)="close()" style="margin-left:20px;background-color: tomato;width: 70px;height: 30px;border-radius: 10px;">Cancle</button>
+
+  </form>

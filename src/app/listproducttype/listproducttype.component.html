@@ -1,0 +1,36 @@
+<app-layout></app-layout>
+
+
+
+<div class="content">
+    
+
+
+
+
+    <h3 style="font-size: 30px;text-align: center;">List product type</h3> <br>
+
+    <br>
+
+    <div class="section group">
+
+        <div *ngFor="let data of array">
+            <div style="cursor: pointer;" class="grid_1_of_4 images_1_of_4">
+                <a (click)="searchproductbyid(data.loaiSanPhamId)"><img src="{{data.hinhAnh}}" alt="" width="264"
+                        height="175" /></a>
+                <br>
+                <span (click)="searchproductbyid(data.loaiSanPhamId)" style="color:#007bff"> {{data.tenLoaiSP}}
+                </span>
+
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+</div>

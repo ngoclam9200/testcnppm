@@ -1,0 +1,129 @@
+<app-layoutadmin></app-layoutadmin>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<div class="newproduct">
+  Create new product type <button onclick="document.getElementById('id01').style.display='block'"
+    style="width:auto;">Create</button> <br>
+</div>
+
+<body>
+
+
+
+  <div id="id01" class="modal">
+
+    <app-layoutadmin></app-layoutadmin>
+    <form class="modal-content" [formGroup]="formGroup" >
+      <div class="container">
+        <a (click)="cancle()" style="color: red;float: right;font-size: 35px;cursor: pointer;">X</a> <br> <br>
+        <h1>Create product type</h1>
+        <p>Please fill in this form .</p>
+
+        <hr>
+        <label for="psw"><b>Name product type</b></label>
+        <input formControlName="tenLoaiSP" type="text" value="" placeholder="Enter name" name="psw" required>
+        <label for="psw"><b>Logo</b></label>
+        <br><br>
+        <input type="file" (change)="onFileSelected($event)" value="" placeholder="Enter full name" name="psw" required>
+        <br><br>
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button (click)="createProducttype()" type="submit" class="signupbtn">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+  </script>
+
+</body>
+<body>
+
+
+
+  <div id="id02" class="modal">
+
+    <app-layoutadmin></app-layoutadmin>
+    <form class="modal-content" [formGroup]="formGroup" >
+      <div class="container">
+        <a (click)="cancle()" style="color: red;float: right;font-size: 35px;cursor: pointer;">X</a> <br> <br>
+        <h1>Update product type</h1>
+        <p>Please fill in this form .</p>
+
+        <hr>
+        <label for="psw"><b>Name product type</b></label>
+        <input formControlName="tenLoaiSP" type="text" value="" placeholder="Enter name" name="psw" required>
+        <!-- <label for="psw"><b>Logo</b></label> -->
+        <label *ngIf="!changeimage" for=""><b> Current Image</b> </label> <br>
+        <label *ngIf="changeimage"  for=""><b> New Image</b> </label> <br>
+        <img width="300px" height="200px" src="{{imagePreview}}" alt="">
+        <br><br>
+        <input type="file" (change)="onFileSelected($event)" value=""  name="psw" required>
+        <br><br>
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('id02').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button (click)="updateproces()" type="submit" class="signupbtn">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id02');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+  </script>
+
+</body>
+<br>
+<table class="contain" border="1">
+  <thead>
+    <tr>
+      <th style="text-align: center">Image</th>
+      <th style="text-align: center">Name product type</th>
+      <th style="text-align: center">Edit</th>
+      <th style="text-align: center">Delete</th>
+
+
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of array ">
+
+      <td (click)="openimage(data.hinhAnh)"> <img  src="{{data.hinhAnh}}" width="100px" height="100px" alt=""> </td>
+      <td> {{data.tenLoaiSP}}</td>
+      <td  (click)="producttypeget(data.loaiSanPhamId)">  <svg style="color: #007bff;height:40px;" onclick="document.getElementById('id02').style.display='block'"
+        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info-circle" class="svg-inline--fa fa-info-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"></path></svg> </td>
+      <td> <svg style="color: red;height:30px;" (click)="deleteproducttype(data.loaiSanPhamId)" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg> </td>
+
+
+
+
+
+
+
+
+    </tr>
+  </tbody>
+</table>

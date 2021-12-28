@@ -4,8 +4,9 @@ import { } from '@angular/common'
 import { Router } from '@angular/router'
 import Chart from 'chart.js/auto';
 import { ApiService } from 'src/services/api.service';
-
-
+import { FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -15,27 +16,72 @@ export class StatisticsComponent implements OnInit {
   data: any
   array: any = []
   arraymonth: any = []
-  newarraymonth: any = []
+ formGroup:FormGroup
+ rechart=false
 
-  arraynumberofbooking: any = []
-  arraycompany: any = []
-  newarraycompany: any = []
+  arraynumberofbills: any = []
 
-  arraynumberofcompany: any = []
+  newarraystatus: any = []
+
+  arraynumberofstatusbill:any= []
   arraybackgroundcolor: any = []
+  year:any=[]
 
-  constructor(private http: HttpClient, private router: Router, private api:ApiService) { }
+  constructor(private http: HttpClient, private router: Router, private api: ApiService) { }
   ngOnInit(): void {
+    this.getrole()
+    this.api.checkuser()
     this.api.checkRole()
-    this.statisticsbooking()
-    this.statisticscompay()
-    }
+    // this.api.checkstaff()
+   
+    this.statisticsorder()
+    this.statisticsbill()
+    this.year=[2021,2022,2023,2024,2025]
+    this.formGroup= new FormGroup({
+      year: new FormControl("", [Validators.required]),
+     
+    }); 
+    
 
-
+  }
+  getrole()
+  {
   
+   
+    var str=this.constructor.name
+    str=str.toLowerCase()
+    var a=str.search('component')
+    str=str.slice(0,a)
+    if(localStorage.getItem('role')=="customer" || localStorage.getItem('role')=="staff") localStorage.setItem('currentpage2',str)
+    else
+    localStorage.setItem('currentpage1',str)
+  }
+  changeyearstatictis()
+  {
+    if(this.formGroup.valid)
+    { localStorage.setItem('year',this.formGroup.controls['year'].value)
+    window.location.reload()
+     
+    }
+   
+    
+    else 
+      
+    Swal.fire(
+      'Fail!',
+      'You have not selected the year',
+      'warning'
+
+    )
+  }
 
 
-  statisticsbooking() {
+
+
+
+  statisticsorder() {
+    var year=localStorage.getItem('year')
+    if(year==null) year="2021"
 
 
 
@@ -45,57 +91,33 @@ export class StatisticsComponent implements OnInit {
     let headers = new HttpHeaders();
     var currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     var token = currentUser.token; // your token
-     headers = headers.set('Access-Control-Allow-Origin', '*').set('Authorization', `Bearer ${token}`);
+    headers = headers.set('Access-Control-Allow-Origin', '*').set('Authorization', `Bearer ${token}`);
 
 
 
-    this.http.get(this.api.apischedule+`all`, { headers: headers }).subscribe(res => {
+    this.http.get(this.api.apibill + `thongkedoanhthutheothang/`+year, { headers: headers }).subscribe(res => {
 
       this.data = res
       this.array = this.data.data
-       for (let i = 0; i < this.array.length; i++) {
-        var t = this.array[i].time
-        t = t.slice(0, 7)
-
-
-        this.arraymonth.push(t)
-
-
-
-
-
+    
+      for(let i=0 ;i<this.array.length;i++)
+      {
+      this.arraymonth.push(this.array[i].thang)
+      this.arraynumberofbills.push(this.array[i].tongDoanhThu)
       }
 
-      for (var i = 0; i < this.arraymonth.length; i++) {
-        if (this.newarraymonth.indexOf(this.arraymonth[i]) === -1) {
-          this.newarraymonth.push(this.arraymonth[i])
-        }
-      }
-      this.newarraymonth.unshift("")
-      this.newarraymonth.sort()
 
-       for (let i = 0; i < this.newarraymonth.length; i++) {
-        var number = 0
-        for (let j = 0; j < this.array.length; j++) {
-          var t = this.array[j].time
-          t = t.slice(0, 7)
-          if (t == this.newarraymonth[i]) number++
 
-        }
-        this.arraynumberofbooking.push(number)
-
-      }
- 
       const myChart = new Chart("myChart", {
 
         type: 'line',
         data: {
 
-          labels: this.newarraymonth,
+          labels: this.arraymonth,
           datasets: [{
-            label: 'Number of bookings',
+            label: 'Revenue per month of ' + localStorage.getItem('year'),
 
-            data: this.arraynumberofbooking,
+            data: this.arraynumberofbills,
 
 
             fill: false,
@@ -107,7 +129,7 @@ export class StatisticsComponent implements OnInit {
           plugins: {
             title: {
               display: true,
-              text: 'Number of bookings per month',
+              text: 'Revenue per month',
               align: 'center',
 
               position: 'bottom'
@@ -117,6 +139,7 @@ export class StatisticsComponent implements OnInit {
         }
 
       });
+      
 
 
 
@@ -126,91 +149,111 @@ export class StatisticsComponent implements OnInit {
 
   }
 
-  statisticscompay() {
+  statisticsbill() {
+
     let headers = new HttpHeaders();
-    this.http.get(this.api.apicar+`all`, { headers: headers }).subscribe(res => {
+    var currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    var token = currentUser.token; // your token
+    headers = headers.set('Access-Control-Allow-Origin', '*').set('Authorization', `Bearer ${token}`);
 
-      this.data = res
-      this.array = this.data.data
-       for (let i = 0; i < this.array.length; i++) {
-        var t = this.array[i].companyName
+     
+      
+  
+        
+            this.http.get(this.api.apibill + `thongketrangthaidonhang`, { headers: headers }).subscribe(res => {
 
-
-
-        this.arraycompany.push(t)
-
-
-
-
-
-      }
-
-      for (var i = 0; i < this.arraycompany.length; i++) {
-        if (this.newarraycompany.indexOf(this.arraycompany[i]) === -1) {
-          this.newarraycompany.push(this.arraycompany[i])
-        }
-      }
-
-      this.newarraycompany.sort()
-
-       for (let i = 0; i < this.newarraycompany.length; i++) {
-        var number = 0
-        for (let j = 0; j < this.array.length; j++) {
-          var t = this.array[j].companyName
-
-          if (t == this.newarraycompany[i]) number++
-
-        }
-        this.arraynumberofcompany.push(number)
-
-      }
- 
-      for (let i = 0; i < this.newarraycompany.length; i++) {
-
-
-
-        this.arraybackgroundcolor.push("rgb(" + Math.floor(Math.random() * (255 + 1)) + "," + Math.floor(Math.random() * (255 + 1)) + "," + Math.floor(Math.random() * (255 + 1)) + ")")
-
-      }
-      const myChart = new Chart("myChartcompany", {
-
-        type: 'pie',
-        data: {
-
-          labels: this.newarraycompany,
-          datasets: [{
-            label: 'Number of bookings',
-
-            data: this.arraynumberofcompany,
-
-
-            backgroundColor: this.arraybackgroundcolor,
-            borderColor: '#82C0E7',
-
-          }]
-        },
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: 'Number of cars of company',
-              align: 'center',
-
-              position: 'bottom'
-
-            }
+          this.data = res
+     
+          this.array = this.data.data
+   
+          for(let i=0 ;i<this.array.length;i++)
+          this.arraynumberofstatusbill.push(this.array[i].soLuongHoaDon)
+          
+        
+          
+          var a=[1,1,2,4]
+       
+          if(this.arraynumberofstatusbill.length==1)
+          this.newarraystatus=["Wait for confirming "]
+          if(this.arraynumberofstatusbill.length==2)
+          this.newarraystatus=["Wait for confirming ", "Delevering"]
+          if(this.arraynumberofstatusbill.length==3)
+          this.newarraystatus=["Wait for confirming ", "Delevering", "Delevered"]
+         else  this.newarraystatus=["Wait for confirming ", "Delevering", "Delevered", "Cancel"]
+        
+           this.arraybackgroundcolor=["red","green","pink","yellow"]
+          const myChart = new Chart("myChartcompany", {
+      
+            type: 'pie',
+            data: {
+      
+              labels: this.newarraystatus,
+              datasets: [{
+                label: 'Number of bookings',
+      
+                data: this.arraynumberofstatusbill,
+      
+      
+                backgroundColor: this.arraybackgroundcolor,
+                borderColor: '#82C0E7',
+      
+              }]
+            },
+            options: {
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Number of bills by status',
+                  align: 'center',
+      
+                  position: 'bottom'
+      
+                }
+              }
+            },
+      
+      
+          });
+      
+      
+      
           }
-        },
+          
+         
+          
+          
+          
+          
+        
+     
+  
+  
+  
+  
+  
+  
+        
+        
+        );
+
+        
+    
+        
+
+        
+      
 
 
-      });
+      
+    
+   
+    
+   
 
-
-
-    });
-
-
-
+    
+    
+   
+    
   }
 
 

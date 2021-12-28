@@ -16,9 +16,26 @@ export class AboutusComponent implements OnInit {
     private router: Router, private api:ApiService) { }
 
   ngOnInit(): void {
+   
+
+    this.api.checkadmin()
+    this.getrole()
     this.getdata()
+    
+    // this.api.checkstaff()
 
 
+  }
+  getrole()
+  {
+    
+    var str=this.constructor.name
+    str=str.toLowerCase()
+    var a=str.search('component')
+    str=str.slice(0,a)
+    if(localStorage.getItem('role')=="admin" || localStorage.getItem('role')=="staff") localStorage.setItem('currentpage2',str)
+    else
+    localStorage.setItem('currentpage1',str)
   }
   getdata() {
     this.http.get( this.api.apiabout+`?about=61654bb70e5cb46aa4f7d781`).subscribe((res) => {

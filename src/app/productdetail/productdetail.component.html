@@ -1,0 +1,136 @@
+<app-layout></app-layout>
+
+
+<div class="content">
+    <div class="content_top">
+        <div class="heading">
+
+            <h3></h3>
+
+            <!-- <a style="cursor: pointer;" *ngFor="let data of arrayproducttype"
+                (click)="searchproductbyid(data.loaiSanPhamId)"> {{data.tenLoaiSP}} || </a> -->
+
+
+
+
+        </div>
+      
+        <div class="clear"></div>
+    </div>
+
+    <div class="section group">
+        <div class="cont-desc span_1_of_2">
+            <div class="product-details">
+                <div class="grid images_3_of_2">
+                    <div id="container">
+                        <div id="products_example">
+                            <div id="products">
+                                <div class="slides_container">
+                                    <br><br>
+                                    <a (click)="openimage(hinhAnh)" target="_blank"><img src="{{hinhAnh}}" alt=" " /></a>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc span_3_of_2">
+                    <h1> {{tenSP}} </h1>
+                    <p style="font-size: 15px"> Discount :{{giamGia}}%</p>
+                    <p style="font-size: 15px;">Number products: {{soLuongConLai}}</p>
+                    <div class="price">
+                       
+                        <p style="font-size: 15px;">Price: <span style="font-size: 35px;" >{{giaTien.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}}</span></p>
+                        <p style="font-size: 15px;">Quantity: <span> <br> 
+                             
+                             <form [formGroup]="formGroup">
+                                <button (click)="decreasing()" style="border-radius:100px;background-color:#007bff;color: white;" class="soluong"> -</button>
+                              <input   formControlName="soLuong" class="soluong" type="number" value="1" style="margin-left: 20px;text-align: center;">
+                              <button (click)="increasing()" class="soluong" style="margin-left: 20px;border-radius: 100px;background-color:#007bff;color: white;"> +</button>
+                            </form>
+                             
+                            </span></p>
+                    </div>
+                    <div class="share-desc">
+
+
+                        <div *ngIf="!isLogin" class="button">
+                            <h4><a style="cursor: pointer;">Login to order</a></h4> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                        </div>
+
+                        <div *ngIf="isLogin" class="button">
+                            <h4><a style="border-radius:20px;background-color:#007bff" (click)="order()">Order</a></h4>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                </div>
+                <div class="clear"></div>
+            </div>
+            <br>
+            <div class="product_desc">
+                <div id="horizontalTab">
+
+
+
+                    <div class="resp-tabs-container">
+
+                        <h4>
+                            Chi tiết về {{tenSP}} <br />
+
+
+                        </h4>
+                        <p> <br /> {{moTa}} <br /></p>
+         
+                    </div>
+                </div>
+            </div>
+
+            <div class="content_bottom">
+                <div class="heading">
+                    <h2>Sản phẩm liên quan đến {{tenSP}}</h2>
+                </div>
+                <div class="see">
+                    <p><a (click)="getallrelate()">Xem tất cả</a></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="section group">
+
+                <div *ngFor="let data of arrayrelate" class="grid_1_of_4 images_1_of_4">
+                    <a href=""><img width="100px" height="100px" src="{{data.hinhAnh}}" alt="" /></a>
+
+
+
+                    <div class="price-details">
+
+                        <div class="price-number">
+
+                            <h5><span style="font-size: 15px;"> {{data.tenSP.slice(0,20)}}... </span></h5>
+                            <h5><span style="color:red" class="rupees"> Price : {{data.giaTien.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}} </span></h5>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="rightsidebar span_3_of_1">
+            <h2> List product type</h2>
+            <ul>
+                <li *ngFor="let data of arrayproducttype"> <a (click)="searchproductbyproducttype(data.loaiSanPhamId)">
+                        {{data.tenLoaiSP}} </a> </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+</div>
