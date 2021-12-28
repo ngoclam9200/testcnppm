@@ -31,7 +31,7 @@ img{max-width:100%;}
 body{
 	font-family: 'Montserrat', sans-serif;
 	margin:0;
-	background:url(image/bgsignup.jpg) no-repeat;
+
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
